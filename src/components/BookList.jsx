@@ -7,7 +7,13 @@ class BookList extends Component {
     searchQuery: '',
   }
 
+  handleSearch = (e) => {
+    this.setState({ searchQuery: e.target.value })
+  }
+
   render() {
+    const { books, selectedBook, onBookSelect } = this.props
+
     return (
       <>
         <Row className="justify-content-center mt-5">
@@ -17,19 +23,25 @@ class BookList extends Component {
                 type="search"
                 placeholder="Cerca un libro"
                 value={this.state.searchQuery}
-                onChange={(e) => this.setState({ searchQuery: e.target.value })}
+                onChange={this.handleSearch}
               />
             </Form.Group>
           </Col>
         </Row>
         <Row className="g-2 mt-3">
-          {this.props.books
+          {books
             .filter((b) =>
-              b.title.toLowerCase().includes(this.state.searchQuery)
+              b.title
+                .toLowerCase()
+                .includes(this.state.searchQuery.toLowerCase())
             )
             .map((b) => (
               <Col xs={12} md={4} key={b.asin}>
-                <SingleBook book={b} />
+                <SingleBook
+                  book={b}
+                  isSelected={selectedBook === b}
+                  onBookSelect={onBookSelect}
+                />
               </Col>
             ))}
         </Row>

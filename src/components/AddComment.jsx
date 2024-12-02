@@ -46,7 +46,7 @@ class AddComment extends Component {
       <div className="my-3">
         <Form onSubmit={this.sendComment}>
           <Form.Group className="mb-2">
-            <Form.Label>Recensione</Form.Label>
+            <Form.Label className="text-light">Recensione</Form.Label>
             <Form.Control
               type="text"
               placeholder="Inserisci qui il testo"
@@ -62,7 +62,7 @@ class AddComment extends Component {
             />
           </Form.Group>
           <Form.Group className="mb-2">
-            <Form.Label>Valutazione</Form.Label>
+            <Form.Label className="text-light">Valutazione</Form.Label>
             <Form.Control
               as="select"
               value={this.state.comment.rate}

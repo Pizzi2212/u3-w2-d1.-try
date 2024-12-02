@@ -1,28 +1,31 @@
-import { Component } from 'react'
-import { Card } from 'react-bootstrap'
-import CommentArea from './CommentArea'
+import React, { Component } from 'react'
+import { Card, Button } from 'react-bootstrap'
 
 class SingleBook extends Component {
-  state = {
-    selected: false,
-  }
-
   render() {
+    const { book, isSelected, onBookSelect } = this.props
+
     return (
-      <>
-        <Card
-          onClick={() => this.setState({ selected: !this.state.selected })}
-          style={{ border: this.state.selected ? '3px solid red' : 'none' }}
-        >
-          <Card.Img variant="top" src={this.props.book.img} />
-          <Card.Body>
-            <Card.Title style={{ color: 'black' }}>
-              {this.props.book.title}
-            </Card.Title>
-          </Card.Body>
-        </Card>
-        {this.state.selected && <CommentArea asin={this.props.book.asin} />}
-      </>
+      <Card
+        onClick={() => onBookSelect(book)}
+        style={{
+          width: '18rem',
+          height: '40rem',
+
+          border: isSelected ? '3px solid red' : '1px solid #ddd',
+          cursor: 'pointer',
+        }}
+      >
+        <Card.Img style={{ height: '22rem' }} variant="top" src={book.img} />
+        <Card.Body>
+          <Card.Title>{book.title}</Card.Title>
+          <Card.Text>{book.category}</Card.Text>
+          <Card.Text>€ {book.price}</Card.Text>
+          <Button className="mt-4" variant="success">
+            Buy
+          </Button>
+        </Card.Body>
+      </Card>
     )
   }
 }
